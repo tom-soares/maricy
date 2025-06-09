@@ -11,20 +11,6 @@
             font-family: 'Inter', sans-serif;
             background-color: #fcfafa;
         }
-        .chart-canvas-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-canvas-container {
-                height: 350px;
-            }
-        }
         .spinner {
             border: 4px solid rgba(0, 0, 0, 0.1);
             border-left-color: #059669;
@@ -40,23 +26,21 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
     <!-- Chosen Palette: Calm Harmony (Light Gray/Neutral Backgrounds, Dark Gray Text, Emerald Accents) -->
-    <!-- Application Structure Plan: The SPA is structured thematically, mirroring the logical flow of a proposal: Introduction, Detailed Options (with a tabbed/toggle interface for comparison), Essential Details (using expandable sections for clarity), LLM-Powered Features (for content generation ideas), and Next Steps. This structure was chosen to facilitate easy comparison between the two proposals and to allow users to progressively disclose information, improving readability and user understanding. The main interaction is the tabbed comparison of proposals and the content generation tool. -->
+    <!-- Application Structure Plan: The SPA is structured thematically: Introduction, Detailed Options (presented side-by-side for easy comparison), Fluxo de Trabalho (now a directly visible section), Observações Importantes (now a directly visible section), and Next Steps (footer). This structure was chosen to facilitate direct comparison between the two proposals by presenting them in a columnar layout on larger screens, improving readability and user understanding, with key information always visible. -->
     <!-- Visualization & Content Choices:
     - Introduction: Goal -> Orient user. Viz -> Text. Interaction -> None. Justification -> Standard. Library -> HTML/Tailwind.
-    - Proposal Options (Estático vs. Gerenciável): Goal -> Allow easy comparison. Viz -> Two content blocks. Interaction -> Tabbed/toggle interface. Justification -> Reduces cognitive load for comparison. Library -> HTML/Tailwind for layout, Vanilla JS for switching.
-    - Investment & Prazo: Goal -> Summarize financial/time. Viz -> Table, Bar Chart. Interaction -> None for table, Chart.js for bar chart data visualization. Justification -> Clear, concise numerical data. Library -> HTML/Tailwind, Chart.js.
-    - Serviços Inclusos/Observações: Goal -> Provide detailed info without clutter. Viz -> Text lists. Interaction -> Expandable sections (details/summary). Justification -> Progressive disclosure. Library -> HTML details/summary.
-    - LLM-Powered Content Generation: Goal -> Offer quick content ideas using AI. Viz -> Text input, button, and text output. Interaction -> User selects type, clicks generate, AI provides text. Justification -> Demonstrates AI potential in content creation, enhances value proposition. Library -> HTML/Tailwind, Vanilla JS, Gemini API.
+    - Proposal Options (Estático vs. Gerenciável): Goal -> Allow easy comparison of features, prices, and timelines. Viz -> Two distinct, side-by-side content blocks with detailed tables for functionality and investment. Interaction -> None (direct comparison). Justification -> Direct visual comparison of key differences using structured data. Library -> HTML/Tailwind for layout and tables.
+    - Fluxo de Trabalho: Goal -> Outline the project process. Viz -> Ordered list. Interaction -> None (always visible). Justification -> Provides clarity on project phases. Library -> HTML.
+    - Observações Importantes: Goal -> Highlight critical notes. Viz -> Unordered list. Interaction -> None (always visible). Justification -> Ensures user is aware of key terms. Library -> HTML.
     - Next Steps: Goal -> Call to action. Viz -> Text. Interaction -> None. Justification -> Standard closing. Library -> HTML/Tailwind.
-    - Chart.js (Mandatory Use): A bar chart comparing the investment of the two options is included to fulfill the mandatory library use.
-    - Plotly.js (Mandatory CDN Load): CDN is loaded as per requirement, but no complex data necessitates a visible Plotly chart over Chart.js for this report type.
+    - Chart.js (Removed): The price comparison chart was removed as per user request.
+    - Plotly.js (Mandatory CDN Load): CDN is loaded as per requirement, but no complex data necessitates a visible Plotly chart for this report type.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
     <div class="container mx-auto p-4 md:p-8 max-w-screen-xl">
         <header class="text-center mb-12 py-8 bg-white rounded-xl shadow-sm">
-            <h1 class="text-4xl md:text-5xl font-bold text-emerald-600 mb-4">Proposta de Desenvolvimento de Soluções Web</h1>
-            <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">Sua Presença Online: A Base para o Sucesso</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-emerald-600 mb-4">Proposta de Desenvolvimento de Site para Imbiliária / Construtora</h1>
             <p class="mt-4 text-gray-600 max-w-3xl mx-auto">Entendemos que sua empresa busca mais do que um simples site; busca uma ferramenta poderosa para conectar-se com clientes, apresentar seus serviços e gerenciar seus projetos de forma eficiente. Esta proposta detalha duas opções de desenvolvimento, cuidadosamente pensadas para atender suas necessidades e garantir um retorno sobre o investimento.</p>
         </header>
 
@@ -64,42 +48,57 @@
             <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Opções de Desenvolvimento Personalizadas</h2>
             <p class="text-gray-700 text-center mb-8">Analisamos suas necessidades e apresentamos duas alternativas robustas, cada uma com suas particularidades, para que você possa escolher a que melhor se alinha aos seus objetivos e orçamento.</p>
 
-            <div class="flex justify-center mb-8">
-                <button id="staticBtn" class="px-6 py-3 rounded-l-lg font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50 transition-colors duration-200">
-                    Site Institucional Estático
-                </button>
-                <button id="managedBtn" class="px-6 py-3 rounded-r-lg font-medium text-emerald-600 bg-emerald-100 hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50 transition-colors duration-200">
-                    Site Gerenciável (Painel Administrativo)
-                </button>
-            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-inner flex flex-col">
+                    <h3 class="text-2xl font-semibold text-emerald-600 mb-4 text-center">🌟 Opção 1: Site Institucional Estático</h3>
+                    <p class="text-gray-700 mb-6 italic border-l-4 border-emerald-300 pl-4 py-2 bg-emerald-50 rounded-md">"A simplicidade aliada à performance para uma primeira impressão inesquecível."</p>
 
-            <div id="staticContent" class="proposal-content active">
-                <h3 class="text-2xl font-semibold text-emerald-600 mb-4">🌟 Opção 1: Site Institucional Estático - "O Cartão de Visitas Digital"</h3>
-                <p class="text-gray-700 mb-6 italic border-l-4 border-emerald-300 pl-4 py-2 bg-emerald-50 rounded-md">"A simplicidade aliada à performance para uma primeira impressão inesquecível."</p>
+                    <p class="text-gray-700 mb-6 flex-grow">Ideal para empresas que desejam uma presença online elegante e informativa, sem a necessidade de atualizações constantes de conteúdo. É a solução perfeita para estabelecer sua marca e fornecer informações essenciais de forma rápida e segura.</p>
 
-                <p class="text-gray-700 mb-6">Ideal para empresas que desejam uma presença online elegante e informativa, sem a necessidade de atualizações constantes de conteúdo. É a solução perfeita para estabelecer sua marca e fornecer informações essenciais de forma rápida e segura.</p>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">Funcionalidades Principais e Serviços Inclusos:</h4>
+                    <div class="overflow-x-auto mb-6">
+                        <table class="min-w-full bg-white rounded-lg shadow-sm">
+                            <thead>
+                                <tr class="bg-emerald-600 text-white">
+                                    <th class="py-3 px-4 text-left font-medium rounded-tl-lg">Serviço</th>
+                                    <th class="py-3 px-4 text-left font-medium rounded-tr-lg">Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 font-semibold">Design Premium & Responsivo</td>
+                                    <td class="py-3 px-4">Layout exclusivo, adaptável a todos os dispositivos (desktop, tablet, mobile).</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 bg-gray-50">
+                                    <td class="py-3 px-4 font-semibold">Páginas Fundamentais</td>
+                                    <td class="py-3 px-4">Página Inicial, Sobre Nós, Serviços/Portfólio (estático), Contato.</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 font-semibold">Otimização SEO Básica</td>
+                                    <td class="py-3 px-4">Configurações iniciais para melhor ranqueamento em buscadores como Google.</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 bg-gray-50">
+                                    <td class="py-3 px-4 font-semibold">Domínio</td>
+                                    <td class="py-3 px-4">Registro de um domínio .com.br (ex: "suaempresa.com.br") por 12 meses.</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 font-semibold">Hospedagem</td>
+                                    <td class="py-3 px-4">Hospedagem em servidor de alta performance, garantindo agilidade e estabilidade por 12 meses.</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 bg-gray-50">
+                                    <td class="py-3 px-4 font-semibold">Certificado de Segurança SSL (HTTPS)</td>
+                                    <td class="py-3 px-4">Instalação de certificado SSL para segurança dos dados e credibilidade do site.</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="py-3 px-4 font-semibold">Suporte Técnico</td>
+                                    <td class="py-3 px-4">1 mês de suporte após a entrega.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                <h4 class="text-xl font-semibold text-gray-800 mb-3">Características Principais:</h4>
-                <ul class="list-disc list-inside text-gray-700 mb-6">
-                    <li><strong class="font-medium">Design Premium & Responsivo:</strong> Layout exclusivo, adaptável a todos os dispositivos (desktop, tablet, mobile), garantindo uma navegação fluida e agradável.
-                        <p class="text-sm text-gray-600 ml-6 mt-1">*Visual impactante que reflete a identidade da sua marca.*</p>
-                    </li>
-                    <li><strong class="font-medium">Páginas Fundamentais:</strong>
-                        <ul class="list-circle list-inside ml-6 mt-2">
-                            <li><strong class="font-medium">Página Inicial (Home):</strong> Uma vitrine para sua empresa, destacando seus valores e serviços.</li>
-                            <li><strong class="font-medium">Sobre Nós:</strong> Detalhes sobre sua história, missão, valores e o que te diferencia no mercado.</li>
-                            <li><strong class="font-medium">Serviços/Portfólio (Estático):</strong> Apresentação de seus serviços e uma galeria fixa de obras realizadas.
-                                <p class="text-sm text-gray-600 ml-6 mt-1">*(Alterações futuras no portfólio via solicitação à nossa equipe).*</p>
-                            </li>
-                            <li><strong class="font-medium">Contato:</strong> Formulário intuitivo, informações de contato completas e mapa interativo para localização.</li>
-                        </ul>
-                    </li>
-                    <li><strong class="font-medium">Otimização SEO Básica:</strong> Configurações iniciais para melhor ranqueamento em buscadores como Google.</li>
-                </ul>
-
-                <div class="bg-gray-100 p-5 rounded-lg shadow-inner mb-6">
                     <h4 class="text-xl font-semibold text-gray-800 mb-4">Investimento & Prazo:</h4>
-                    <div class="overflow-x-auto">
+                    <div class="overflow-x-auto mb-4">
                         <table class="min-w-full bg-white rounded-lg shadow-sm">
                             <thead>
                                 <tr class="bg-emerald-600 text-white">
@@ -120,42 +119,77 @@
                                     <td class="py-3 px-4">Prazo Estimado</td>
                                     <td class="py-3 px-4">20 dias úteis</td>
                                 </tr>
-                                <tr class="bg-gray-50">
-                                    <td class="py-3 px-4">Lucro Previsto</td>
-                                    <td class="py-3 px-4">R$ 2.000,00 (conforme sua meta)</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-            </div>
 
-            <div id="managedContent" class="proposal-content hidden">
-                <h3 class="text-2xl font-semibold text-emerald-600 mb-4">🚀 Opção 2: Site Gerenciável com Painel Administrativo - "Total Controle, Total Autonomia"</h3>
-                <p class="text-gray-700 mb-6 italic border-l-4 border-emerald-300 pl-4 py-2 bg-emerald-50 rounded-md">"Liberdade para gerenciar seu conteúdo, expandir seu portfólio e mostrar cada conquista."</p>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-inner flex flex-col">
+                    <h3 class="text-2xl font-semibold text-emerald-600 mb-4 text-center">🚀 Opção 2: Site Gerenciável com Painel Administrativo</h3>
+                    <p class="text-gray-700 mb-6 italic border-l-4 border-emerald-300 pl-4 py-2 bg-emerald-50 rounded-md">"Liberdade para gerenciar seu conteúdo, expandir seu portfólio e mostrar cada conquista."</p>
 
-                <p class="text-gray-700 mb-6">Esta é a escolha estratégica para empresas que precisam de autonomia para gerenciar e atualizar seu conteúdo, especialmente o <strong class="font-medium">cadastro de novas obras</strong>, com rica inserção de mídias e descrições detalhadas. É uma plataforma dinâmica que cresce com seu negócio.</p>
+                    <p class="text-gray-700 mb-6 flex-grow">Esta é a escolha estratégica para empresas que precisam de autonomia para gerenciar e atualizar o conteúdo do site, especialmente o cadastro de novas obras, com rica inserção de mídias e descrições detalhadas. É uma plataforma dinâmica que cresce com seu negócio.</p>
 
-                <h4 class="text-xl font-semibold text-gray-800 mb-3">Funcionalidades Adicionais (além da Opção 1):</h4>
-                <ul class="list-disc list-inside text-gray-700 mb-6">
-                    <li><strong class="font-medium">Painel Administrativo (CMS) Intuitivo:</strong> Uma interface de fácil uso para você ou sua equipe gerenciar o site sem necessidade de conhecimentos técnicos.
-                        <p class="text-sm text-gray-600 ml-6 mt-1">*Total autonomia para atualizações a qualquer momento.*</p>
-                    </li>
-                    <li><strong class="font-medium">Sistema de Gerenciamento de Obras:</strong>
-                        <ul class="list-circle list-inside ml-6 mt-2">
-                            <li><strong class="font-medium">Cadastro Completo:</strong> Adicione, edite e remova obras com facilidade.</li>
-                            <li><strong class="font-medium">Galeria Multimídia:</strong> Faça upload ilimitado de <strong class="font-medium">fotos em alta resolução e vídeos</strong> para cada projeto, criando um portfólio visualmente rico e interativo.</li>
-                            <li><strong class="font-medium">Descrições Detalhadas:</strong> Espaço para narrar a história de cada obra, desafios, soluções e resultados.</li>
-                            <li><strong class="font-medium">Categorização Inteligente:</strong> Organize suas obras por tipo (residencial, comercial, reforma, etc.), facilitando a navegação do seu cliente.</li>
-                            <li><strong class="font-medium">Filtros de Busca Avançados:</strong> Clientes podem pesquisar obras por categoria, localização ou outras tags.</li>
-                        </ul>
-                    </li>
-                    <li><strong class="font-medium">Edição de Conteúdo Autônoma:</strong> Capacidade de editar textos e imagens das páginas "Sobre Nós" e "Contato (sem alterar a estrutura do formulário)" diretamente pelo painel.</li>
-                </ul>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">Funcionalidades Adicionais e Serviços Inclusos:</h4>
+                    <div class="overflow-x-auto mb-6">
+                        <table class="min-w-full bg-white rounded-lg shadow-sm">
+                            <thead>
+                                <tr class="bg-emerald-600 text-white">
+                                    <th class="py-3 px-4 text-left font-medium rounded-tl-lg">Funcionalidade/Serviço Adicional</th>
+                                    <th class="py-3 px-4 text-left font-medium rounded-tr-lg">Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 font-semibold">Painel Administrativo (CMS) Intuitivo</td>
+                                    <td class="py-3 px-4">Interface de fácil uso para você ou sua equipe gerenciar o site sem necessidade de conhecimentos técnicos.</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 bg-gray-50">
+                                    <td class="py-3 px-4 font-semibold">Sistema de Gerenciamento de Obras</td>
+                                    <td class="py-3 px-4">Cadastro, edição e exclusão de obras com fotos e vídeos ilimitados, descrições detalhadas, categorização inteligente e filtros de busca.</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 font-semibold">Edição de Conteúdo Autônoma</td>
+                                    <td class="py-3 px-4">Capacidade de editar textos e imagens das páginas "Sobre Nós" e "Contato" diretamente pelo painel.</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 bg-gray-50">
+                                    <td class="py-3 px-4 font-semibold">Suporte Técnico Estendido</td>
+                                    <td class="py-3 px-4">3 meses de suporte completo para dúvidas e auxílio no uso do painel.</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 font-semibold">Treinamento Personalizado</td>
+                                    <td class="py-3 px-4">Sessão para que você e sua equipe dominem o painel administrativo.</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 bg-gray-50">
+                                    <td class="py-3 px-4 font-semibold">Design Premium & Responsivo</td>
+                                    <td class="py-3 px-4">Layout exclusivo, adaptável a todos os dispositivos (desktop, tablet, mobile).</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 font-semibold">Páginas Fundamentais</td>
+                                    <td class="py-3 px-4">Página Inicial, Sobre Nós, Serviços/Portfólio (gerenciável), Contato.</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 bg-gray-50">
+                                    <td class="py-3 px-4 font-semibold">Otimização SEO Básica</td>
+                                    <td class="py-3 px-4">Configurações iniciais para melhor ranqueamento em buscadores como Google.</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-3 px-4 font-semibold">Domínio</td>
+                                    <td class="py-3 px-4">Registro de um domínio .com.br (ex: "suaempresa.com.br") por 12 meses.</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 bg-gray-50">
+                                    <td class="py-3 px-4 font-semibold">Hospedagem</td>
+                                    <td class="py-3 px-4">Hospedagem em servidor de alta performance, garantindo agilidade e estabilidade por 12 meses.</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="py-3 px-4 font-semibold">Certificado de Segurança SSL (HTTPS)</td>
+                                    <td class="py-3 px-4">Instalação de certificado SSL para segurança dos dados e credibilidade do site.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                <div class="bg-gray-100 p-5 rounded-lg shadow-inner mb-6">
                     <h4 class="text-xl font-semibold text-gray-800 mb-4">Investimento & Prazo:</h4>
-                    <div class="overflow-x-auto">
+                    <div class="overflow-x-auto mb-4">
                         <table class="min-w-full bg-white rounded-lg shadow-sm">
                             <thead>
                                 <tr class="bg-emerald-600 text-white">
@@ -176,288 +210,40 @@
                                     <td class="py-3 px-4">Prazo Estimado</td>
                                     <td class="py-3 px-4">45 dias úteis</td>
                                 </tr>
-                                <tr class="bg-gray-50">
-                                    <td class="py-3 px-4">Lucro Previsto</td>
-                                    <td class="py-3 px-4">Proporcional ao trabalho e valor agregado</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md mt-12">
-                <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Comparativo de Investimento</h3>
-                <p class="text-gray-700 text-center mb-8">Este gráfico ilustra a diferença de investimento entre as duas opções de desenvolvimento propostas.</p>
-                <div class="chart-canvas-container">
-                    <canvas id="investmentChart"></canvas>
-                </div>
-            </div>
-
         </section>
 
         <section class="mb-12 bg-white p-6 rounded-xl shadow-md">
-            <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Recursos com Inteligência Artificial ✨</h2>
-            <p class="text-gray-700 text-center mb-8">Explore como o Gemini pode ajudar a acelerar a criação de conteúdo para o seu novo site.</p>
-
-            <div class="flex flex-col md:flex-row items-center md:items-start justify-center gap-6">
-                <div class="flex-1 bg-gray-100 p-5 rounded-lg shadow-inner w-full">
-                    <h4 class="text-xl font-semibold text-gray-800 mb-4">Gerar Ideias de Conteúdo para Páginas</h4>
-                    <p class="text-gray-700 mb-4">Selecione o tipo de página para o qual deseja gerar ideias de texto:</p>
-                    <select id="pageTypeSelect" class="w-full p-2 border border-gray-300 rounded-md focus:ring-emerald-500 focus:border-emerald-500 mb-4">
-                        <option value="sobreNos">Página "Sobre Nós"</option>
-                        <option value="servicosConstrucao">Página "Serviços de Construção"</option>
-                        <option value="portfolio">Página "Portfólio de Obras"</option>
-                    </select>
-                    <button id="generateContentBtn" class="w-full bg-emerald-600 text-white py-2 px-4 rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50 transition-colors duration-200 flex items-center justify-center">
-                        Gerar Conteúdo ✨
-                        <span id="llmSpinner" class="spinner ml-2 hidden"></span>
-                    </button>
-                    <div id="generatedContentOutput" class="mt-6 p-4 bg-white border border-gray-200 rounded-md text-gray-700 hidden">
-                        <h5 class="font-semibold text-gray-800 mb-2">Conteúdo Sugerido:</h5>
-                        <p id="generatedContentText"></p>
-                    </div>
-                    <div id="llmError" class="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md hidden" role="alert">
-                        Ocorreu um erro ao gerar o conteúdo. Por favor, tente novamente.
-                    </div>
-                </div>
-            </div>
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Fluxo de Trabalho 🚀</h2>
+            <p class="text-gray-700 text-center mb-8">Compreenda cada etapa do nosso processo de desenvolvimento, do briefing à entrega final.</p>
+            <ol class="list-decimal list-inside text-gray-700 mt-4 ml-4">
+                <li><strong class="font-medium">Briefing:</strong> Compreensão profunda de suas necessidades e objetivos.</li>
+                <li><strong class="font-medium">Design & Aprovação:</strong> Criação do layout e sua aprovação.</li>
+                <li><strong class="font-medium">Desenvolvimento:</strong> Codificação e implementação das funcionalidades.</li>
+                <li><strong class="font-medium">Conteúdo:</strong> Inserção do material fornecido (textos, fotos, vídeos).</li>
+                <li><strong class="font-medium">Revisão & Lançamento:</strong> Testes finais e publicação do site.</li>
+            </ol>
         </section>
 
         <section class="mb-12 bg-white p-6 rounded-xl shadow-md">
-            <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Detalhes Essenciais para Ambas as Opções</h2>
-            <p class="text-gray-700 text-center mb-8">Informações importantes que se aplicam a ambas as opções de desenvolvimento do site.</p>
-
-            <details class="mb-4 bg-gray-100 p-4 rounded-lg shadow-sm cursor-pointer">
-                <summary class="font-semibold text-xl text-gray-800 hover:text-emerald-700 transition-colors duration-200">Serviços Inclusos</summary>
-                <ul class="list-disc list-inside text-gray-700 mt-4 ml-4">
-                    <li><strong class="font-medium">Registro de Domínio .com.br:</strong> O endereço exclusivo do seu site (ex: _seunome.com.br_) por 12 meses.</li>
-                    <li><strong class="font-medium">Hospedagem de Alta Performance:</strong> Espaço no servidor para o seu site, garantindo velocidade e estabilidade por 12 meses.</li>
-                    <li><strong class="font-medium">Certificado de Segurança SSL (HTTPS):</strong> Essencial para a segurança dos dados e para a credibilidade do seu site junto aos navegadores e ao Google.</li>
-                    <li><strong class="font-medium">Suporte Técnico:</strong>
-                        <ul class="list-circle list-inside ml-6 mt-2">
-                            <li><strong class="font-medium">Opção 1 (Estático):</strong> 1 mês de suporte para dúvidas pontuais.</li>
-                            <li><strong class="font-medium">Opção 2 (Gerenciável):</strong> 3 meses de suporte completo para dúvidas e auxílio no uso do painel.</li>
-                        </ul>
-                    </li>
-                    <li><strong class="font-medium">Treinamento (apenas Opção 2):</strong> Sessão personalizada (presencial em Marília ou online) para que você e sua equipe dominem o painel administrativo.</li>
-                </ul>
-            </details>
-
-            <details class="mb-4 bg-gray-100 p-4 rounded-lg shadow-sm cursor-pointer">
-                <summary class="font-semibold text-xl text-gray-800 hover:text-emerald-700 transition-colors duration-200">Fluxo de Trabalho</summary>
-                <ol class="list-decimal list-inside text-gray-700 mt-4 ml-4">
-                    <li><strong class="font-medium">Briefing:</strong> Compreensão profunda de suas necessidades e objetivos.</li>
-                    <li><strong class="font-medium">Design & Aprovação:</strong> Criação do layout e sua aprovação.</li>
-                    <li><strong class="font-medium">Desenvolvimento:</strong> Codificação e implementação das funcionalidades.</li>
-                    <li><strong class="font-medium">Conteúdo:</strong> Inserção do material fornecido (textos, fotos, vídeos).</li>
-                    <li><strong class="font-medium">Revisão & Lançamento:</strong> Testes finais e publicação do site.</li>
-                </ol>
-            </details>
-
-            <details class="mb-4 bg-gray-100 p-4 rounded-lg shadow-sm cursor-pointer">
-                <summary class="font-semibold text-xl text-gray-800 hover:text-emerald-700 transition-colors duration-200">Observações Importantes</summary>
-                <ul class="list-disc list-inside text-gray-700 mt-4 ml-4">
-                    <li><strong class="font-medium">Conteúdo:</strong> A criação de textos, fotos, vídeos e logo é de sua responsabilidade. Nossa equipe otimizará e inserirá o material fornecido.</li>
-                    <li><strong class="font-medium">Renovações:</strong> Após o primeiro ano, os custos anuais de renovação do domínio (aprox. R$ 50) e hospedagem (aprox. R$ 200-600, dependendo do plano e uso) serão de sua responsabilidade.</li>
-                    <li><strong class="font-medium">Funcionalidades Adicionais:</strong> Integrações com outros sistemas (CRM, ERP), chat online, módulos de blog, ou qualquer outra funcionalidade específica não listada podem ser orçadas à parte.</li>
-                </ul>
-            </details>
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Observações Importantes 📝</h2>
+            <p class="text-gray-700 text-center mb-8">Pontos cruciais para o entendimento completo da nossa proposta e do projeto.</p>
+            <ul class="list-disc list-inside text-gray-700 mt-4 ml-4">
+                <li><strong class="font-medium">Conteúdo:</strong> A criação de textos, fotos, vídeos e logo é de sua responsabilidade. Nossa equipe otimizará e inserirá o material fornecido.</li>
+                <li><strong class="font-medium">Renovações:</strong> Após o primeiro ano, os custos anuais de renovação do domínio (aprox. R$ 50) e hospedagem (aprox. R$ 200-600, dependendo do plano e uso) serão de sua responsabilidade.</li>
+                <li><strong class="font-medium">Funcionalidades Adicionais:</strong> Integrações com outros sistemas (CRM, ERP), chat online, módulos de blog, ou qualquer outra funcionalidade específica não listada podem ser orçadas à parte.</li>
+            </ul>
         </section>
-
-        <footer class="text-center py-8 bg-white rounded-xl shadow-sm">
-            <h2 class="text-3xl font-semibold text-emerald-600 mb-4">Próximos Passos</h2>
-            <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-6">Estamos entusiasmados com a possibilidade de ser seu parceiro neste projeto! Para dar o próximo passo, sugiro agendarmos uma reunião.</p>
-            <button class="px-8 py-4 bg-emerald-600 text-white font-bold rounded-lg shadow-lg hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-500 focus:ring-opacity-50 transition-all duration-300 transform hover:scale-105">
-                Agende uma Reunião
-            </button>
-            <p class="mt-6 text-gray-600 max-w-2xl mx-auto">Discutiremos esta proposta em detalhes, esclareceremos quaisquer dúvidas e entenderemos ainda mais suas particularidades para alinharmos a melhor estratégia para sua presença digital.</p>
-            <p class="mt-4 text-gray-600">Conte conosco para construir a base do seu sucesso online!</p>
-        </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const staticBtn = document.getElementById('staticBtn');
-            const managedBtn = document.getElementById('managedBtn');
-            const staticContent = document.getElementById('staticContent');
-            const managedContent = document.getElementById('managedContent');
-            const pageTypeSelect = document.getElementById('pageTypeSelect');
-            const generateContentBtn = document.getElementById('generateContentBtn');
-            const generatedContentOutput = document.getElementById('generatedContentOutput');
-            const generatedContentText = document.getElementById('generatedContentText');
-            const llmSpinner = document.getElementById('llmSpinner');
-            const llmError = document.getElementById('llmError');
-
-            function showStatic() {
-                staticContent.classList.remove('hidden');
-                managedContent.classList.add('hidden');
-                staticBtn.classList.add('bg-emerald-600', 'text-white');
-                staticBtn.classList.remove('bg-emerald-100', 'text-emerald-600');
-                managedBtn.classList.add('bg-emerald-100', 'text-emerald-600');
-                managedBtn.classList.remove('bg-emerald-600', 'text-white');
-            }
-
-            function showManaged() {
-                staticContent.classList.add('hidden');
-                managedContent.classList.remove('hidden');
-                managedBtn.classList.add('bg-emerald-600', 'text-white');
-                managedBtn.classList.remove('bg-emerald-100', 'text-emerald-600');
-                staticBtn.classList.add('bg-emerald-100', 'text-emerald-600');
-                staticBtn.classList.remove('bg-emerald-600', 'text-white');
-            }
-
-            staticBtn.addEventListener('click', showStatic);
-            managedBtn.addEventListener('click', showManaged);
-
-            showStatic();
-
-            const ctx = document.getElementById('investmentChart').getContext('2d');
-            const investmentChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Site Estático', 'Site Gerenciável'],
-                    datasets: [{
-                        label: 'Investimento (R$)',
-                        data: [3500, 6800],
-                        backgroundColor: [
-                            'rgba(16, 185, 129, 0.7)',
-                            'rgba(6, 95, 212, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgba(16, 185, 129, 1)',
-                            'rgba(6, 95, 212, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed.y !== null) {
-                                        label += new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(context.parsed.y);
-                                    }
-                                    return label;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Valor em Reais (R$)'
-                            },
-                            ticks: {
-                                callback: function(value) {
-                                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
-                                }
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Opções de Site'
-                            },
-                            ticks: {
-                                callback: function(value, index, values) {
-                                    const label = this.getLabelForValue(value);
-                                    const maxLen = 16;
-                                    if (label.length > maxLen) {
-                                        return label.split(' ').map((word, i, arr) => {
-                                            let currentLine = '';
-                                            const lines = [];
-                                            word.split('').forEach(char => {
-                                                if ((currentLine + char).length > maxLen && currentLine.length > 0) {
-                                                    lines.push(currentLine);
-                                                    currentLine = char;
-                                                } else {
-                                                    currentLine += char;
-                                                }
-                                            });
-                                            if (currentLine) {
-                                                lines.push(currentLine);
-                                            }
-                                            return lines;
-                                        }).flat();
-                                    }
-                                    return label;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            generateContentBtn.addEventListener('click', async () => {
-                const pageType = pageTypeSelect.value;
-                let prompt = '';
-
-                llmSpinner.classList.remove('hidden');
-                generateContentBtn.disabled = true;
-                generatedContentOutput.classList.add('hidden');
-                llmError.classList.add('hidden');
-                generatedContentText.textContent = '';
-
-                switch (pageType) {
-                    case 'sobreNos':
-                        prompt = 'Gere um parágrafo introdutório para uma página "Sobre Nós" de uma empresa de construção civil e reformas que foca em qualidade, inovação e satisfação do cliente.';
-                        break;
-                    case 'servicosConstrucao':
-                        prompt = 'Gere ideias de tópicos e um parágrafo de introdução para a página de "Serviços de Construção" de uma empresa de construção civil, incluindo diferenciais, processo e chamada para ação.';
-                        break;
-                    case 'portfolio':
-                        prompt = 'Gere um parágrafo de introdução para uma página de "Portfólio de Obras" de uma empresa de construção civil, enfatizando a variedade e excelência dos projetos realizados.';
-                        break;
-                    default:
-                        prompt = 'Gere um parágrafo de conteúdo geral para um site de construção civil.';
-                }
-
-                try {
-                    let chatHistory = [];
-                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                    const payload = { contents: chatHistory };
-                    const apiKey = "";
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-                    const response = await fetch(apiUrl, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(payload)
-                            });
-                    const result = await response.json();
-                    if (result.candidates && result.candidates.length > 0 &&
-                        result.candidates[0].content && result.candidates[0].content.parts &&
-                        result.candidates[0].content.parts.length > 0) {
-                      const text = result.candidates[0].content.parts[0].text;
-                      generatedContentText.textContent = text;
-                      generatedContentOutput.classList.remove('hidden');
-                    } else {
-                      llmError.classList.remove('hidden');
-                      console.error("Estrutura de resposta inesperada:", result);
-                    }
-                } catch (error) {
-                    llmError.classList.remove('hidden');
-                    console.error("Erro ao chamar a API Gemini:", error);
-                } finally {
-                    llmSpinner.classList.add('hidden');
-                    generateContentBtn.disabled = false;
-                }
-            });
+            // No LLM features in this version, so no LLM-related JS
         });
     </script>
 </body>
